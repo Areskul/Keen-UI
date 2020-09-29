@@ -1,13 +1,11 @@
 <template>
     <component
         class="ui-button"
-
         :class="classes"
         :disabled="disabled || loading"
         :href="isAnchor ? (disabled ? null : href) : null"
         :is="isAnchor ? 'a' : 'button'"
         :type="isAnchor ? null : buttonType"
-
         @click="onClick"
     >
         <div class="ui-button__content">
@@ -23,8 +21,13 @@
                 class="ui-button__dropdown-icon"
                 v-if="hasDropdown && iconPosition !== 'right'"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M6.984 9.984h10.03L12 15z"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M6.984 9.984h10.03L12 15z" />
                 </svg>
             </ui-icon>
         </div>
@@ -34,66 +37,38 @@
         <ui-progress-circular
             class="ui-button__progress"
             disable-transition
-
             :color="progressColor"
             :size="18"
             :stroke="4.5"
-
             v-if="loading"
         ></ui-progress-circular>
 
         <ui-ripple-ink v-if="!disableRipple && !disabled"></ui-ripple-ink>
-
-        <ui-popover
-            contain-focus
-            ref="dropdown"
-
-            :append-to-body="appendDropdownToBody"
-            :constrain-to-scroll-parent="constrainDropdownToScrollParent"
-            :position="dropdownPosition"
-            :open-on="openDropdownOn"
-
-            @close="onDropdownClose"
-            @open="onDropdownOpen"
-
-            v-if="hasDropdown"
-        >
-            <slot name="dropdown"></slot>
-        </ui-popover>
-
-        <ui-tooltip
-            :open-on="openTooltipOn"
-            :position="tooltipPosition"
-
-            v-if="tooltip"
-        >{{ tooltip }}</ui-tooltip>
     </component>
 </template>
 
 <script>
-import UiIcon from './UiIcon.vue';
-import UiPopover from './UiPopover.vue';
-import UiProgressCircular from './UiProgressCircular.vue';
-import UiRippleInk from './UiRippleInk.vue';
-import UiTooltip from './UiTooltip.vue';
+import UiIcon from "./UiIcon.vue";
+import UiProgressCircular from "./UiProgressCircular.vue";
+import UiRippleInk from "./UiRippleInk.vue";
 
 export default {
-    name: 'ui-button',
+    name: "ui-button",
 
     props: {
         type: {
             type: String,
-            default: 'primary' // 'primary' or 'secondary'
+            default: "primary" // 'primary' or 'secondary'
         },
         buttonType: String,
         href: String,
         color: {
             type: String,
-            default: 'default' // 'default', 'primary', 'accent', 'green', 'orange', or 'red'
+            default: "default" // 'default', 'primary', 'accent', 'green', 'orange', or 'red'
         },
         size: {
             type: String,
-            default: 'normal' // 'small', 'normal', 'large'
+            default: "normal" // 'small', 'normal', 'large'
         },
         raised: {
             type: Boolean,
@@ -102,7 +77,7 @@ export default {
         icon: String,
         iconPosition: {
             type: String,
-            default: 'left' // 'left' or 'right'
+            default: "left" // 'left' or 'right'
         },
         loading: {
             type: Boolean,
@@ -114,7 +89,7 @@ export default {
         },
         dropdownPosition: {
             type: String,
-            default: 'bottom-start'
+            default: "bottom-start"
         },
         appendDropdownToBody: {
             type: Boolean,
@@ -126,7 +101,7 @@ export default {
         },
         openDropdownOn: {
             type: String,
-            default: 'click' // 'click', 'hover', 'focus', or 'always'
+            default: "click" // 'click', 'hover', 'focus', or 'always'
         },
         tooltip: String,
         openTooltipOn: String,
@@ -148,11 +123,11 @@ export default {
                 `ui-button--color-${this.color}`,
                 `ui-button--icon-position-${this.iconPosition}`,
                 `ui-button--size-${this.size}`,
-                { 'is-anchor': this.isAnchor },
-                { 'is-raised': this.raised },
-                { 'is-loading': this.loading },
-                { 'is-disabled': this.disabled || this.loading },
-                { 'has-dropdown': this.hasDropdown }
+                { "is-anchor": this.isAnchor },
+                { "is-raised": this.raised },
+                { "is-loading": this.loading },
+                { "is-disabled": this.disabled || this.loading },
+                { "has-dropdown": this.hasDropdown }
             ];
         },
 
@@ -161,25 +136,25 @@ export default {
         },
 
         progressColor() {
-            if (this.color === 'default' || this.type === 'secondary') {
-                return 'black';
+            if (this.color === "default" || this.type === "secondary") {
+                return "black";
             }
 
-            return 'white';
+            return "white";
         }
     },
 
     methods: {
         onClick(e) {
-            this.$emit('click', e);
+            this.$emit("click", e);
         },
 
         onDropdownOpen() {
-            this.$emit('dropdown-open');
+            this.$emit("dropdown-open");
         },
 
         onDropdownClose() {
-            this.$emit('dropdown-close');
+            this.$emit("dropdown-close");
         },
 
         openDropdown() {
@@ -203,16 +178,14 @@ export default {
 
     components: {
         UiIcon,
-        UiPopover,
         UiProgressCircular,
-        UiRippleInk,
-        UiTooltip
+        UiRippleInk
     }
 };
 </script>
 
 <style lang="scss">
-@import './styles/imports';
+@import "./styles/imports";
 
 .ui-button {
     align-items: center;

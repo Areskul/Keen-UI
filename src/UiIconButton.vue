@@ -1,14 +1,12 @@
 <template>
     <component
         class="ui-icon-button"
-
         :aria-label="ariaLabel || tooltip"
         :class="classes"
         :disabled="disabled || loading"
         :href="isAnchor ? (disabled ? null : href) : null"
         :is="isAnchor ? 'a' : 'button'"
         :type="isAnchor ? null : buttonType"
-
         @click="onClick"
     >
         <div class="ui-icon-button__icon" v-if="icon || $slots.default">
@@ -21,66 +19,39 @@
 
         <ui-progress-circular
             class="ui-icon-button__progress"
-
             :color="progressColor"
             :size="size === 'large' ? 24 : 18"
             :stroke="4.5"
-
             v-if="loading"
         ></ui-progress-circular>
 
         <ui-ripple-ink v-if="!disableRipple && !disabled"></ui-ripple-ink>
-
-        <ui-popover
-            constain-focus
-            ref="dropdown"
-
-            :append-to-body="appendDropdownToBody"
-            :constrain-to-scroll-parent="constrainDropdownToScrollParent"
-            :position="dropdownPosition"
-            :open-on="openDropdownOn"
-
-            @close="onDropdownClose"
-            @open="onDropdownOpen"
-
-            v-if="hasDropdown"
-        >
-            <slot name="dropdown"></slot>
-        </ui-popover>
-
-        <ui-tooltip
-            :open-on="openTooltipOn"
-            :position="tooltipPosition"
-
-            v-if="tooltip"
-        >{{ tooltip }}</ui-tooltip>
     </component>
 </template>
 
 <script>
-import UiIcon from './UiIcon.vue';
-import UiPopover from './UiPopover.vue';
-import UiProgressCircular from './UiProgressCircular.vue';
-import UiRippleInk from './UiRippleInk.vue';
-import UiTooltip from './UiTooltip.vue';
+import UiIcon from "./UiIcon.vue";
+
+import UiProgressCircular from "./UiProgressCircular.vue";
+import UiRippleInk from "./UiRippleInk.vue";
 
 export default {
-    name: 'ui-icon-button',
+    name: "ui-icon-button",
 
     props: {
         type: {
             type: String,
-            default: 'primary' // 'primary' or 'secondary'
+            default: "primary" // 'primary' or 'secondary'
         },
         buttonType: String,
         href: String,
         color: {
             type: String,
-            default: 'default' // 'default', 'primary', 'accent', 'green', 'orange', or 'red'
+            default: "default" // 'default', 'primary', 'accent', 'green', 'orange', or 'red'
         },
         size: {
             type: String,
-            default: 'normal' // 'mini', 'small', normal', or 'large'
+            default: "normal" // 'mini', 'small', normal', or 'large'
         },
         icon: String,
         ariaLabel: String,
@@ -94,7 +65,7 @@ export default {
         },
         dropdownPosition: {
             type: String,
-            default: 'bottom-start'
+            default: "bottom-start"
         },
         appendDropdownToBody: {
             type: Boolean,
@@ -106,7 +77,7 @@ export default {
         },
         openDropdownOn: {
             type: String,
-            default: 'click' // 'click', 'hover', 'focus', or 'always'
+            default: "click" // 'click', 'hover', 'focus', or 'always'
         },
         tooltip: String,
         openTooltipOn: String,
@@ -127,10 +98,10 @@ export default {
                 `ui-icon-button--type-${this.type}`,
                 `ui-icon-button--color-${this.color}`,
                 `ui-icon-button--size-${this.size}`,
-                { 'is-anchor': this.isAnchor },
-                { 'is-loading': this.loading },
-                { 'is-disabled': this.disabled || this.loading },
-                { 'has-dropdown': this.hasDropdown }
+                { "is-anchor": this.isAnchor },
+                { "is-loading": this.loading },
+                { "is-disabled": this.disabled || this.loading },
+                { "has-dropdown": this.hasDropdown }
             ];
         },
 
@@ -139,33 +110,33 @@ export default {
         },
 
         progressColor() {
-            if (this.type === 'primary') {
-                if (this.color === 'default' || this.color === 'black') {
-                    return 'black';
+            if (this.type === "primary") {
+                if (this.color === "default" || this.color === "black") {
+                    return "black";
                 }
 
-                return 'white';
+                return "white";
             }
 
-            if (this.color === 'white') {
-                return 'white';
+            if (this.color === "white") {
+                return "white";
             }
 
-            return 'black';
+            return "black";
         }
     },
 
     methods: {
         onClick(e) {
-            this.$emit('click', e);
+            this.$emit("click", e);
         },
 
         onDropdownOpen() {
-            this.$emit('dropdown-open');
+            this.$emit("dropdown-open");
         },
 
         onDropdownClose() {
-            this.$emit('dropdown-close');
+            this.$emit("dropdown-close");
         },
 
         openDropdown() {
@@ -189,21 +160,20 @@ export default {
 
     components: {
         UiIcon,
-        UiPopover,
+
         UiProgressCircular,
-        UiRippleInk,
-        UiTooltip
+        UiRippleInk
     }
 };
 </script>
 
 <style lang="scss">
-@import './styles/imports';
+@import "./styles/imports";
 
-$ui-icon-button-size            : rem(36px) !default;
-$ui-icon-button--size-mini      : rem(24px) !default;
-$ui-icon-button--size-small     : rem(32px) !default;
-$ui-icon-button--size-large     : rem(48px) !default;
+$ui-icon-button-size: rem(36px) !default;
+$ui-icon-button--size-mini: rem(24px) !default;
+$ui-icon-button--size-small: rem(32px) !default;
+$ui-icon-button--size-large: rem(48px) !default;
 
 .ui-icon-button {
     align-items: center;
