@@ -25,7 +25,7 @@
           :step="stepValue"
           :tabindex="tabindex"
           :type="type"
-          :value="value"
+          v-model="value"
           @blur="onBlur"
           @change="onChange"
           @focus="onFocus"
@@ -49,7 +49,7 @@
           :required="required"
           :rows="rows"
           :tabindex="tabindex"
-          :value="value"
+          v-model="value"
           @blur="onBlur"
           @change="onChange"
           @focus="onFocus"
@@ -90,7 +90,7 @@
 import autofocus from "./directives/autofocus";
 import UiIcon from "./UiIcon.vue";
 
-import autosize from "autosize";
+/*import autosize from "autosize";*/
 
 export default {
   name: "ui-textbox",
@@ -130,10 +130,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    autosize: {
-      type: Boolean,
-      default: true,
-    },
+    /*autosize: {*/
+    /*type: Boolean,*/
+    /*default: true,*/
+    /*},*/
     min: Number,
     max: Number,
     step: {
@@ -171,7 +171,7 @@ export default {
       isActive: false,
       isTouched: false,
       initialValue: this.value,
-      autosizeInitialized: false,
+      /*autosizeInitialized: false,*/
     };
   },
 
@@ -256,18 +256,18 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.multiLine && this.autosize) {
-      autosize(this.$refs.textarea);
-      this.autosizeInitialized = true;
-    }
-  },
+  /*mounted() {*/
+  /*if (this.multiLine && this.autosize) {*/
+  /*autosize(this.$refs.textarea);*/
+  /*this.autosizeInitialized = true;*/
+  /*}*/
+  /*},*/
 
-  beforeUnmount() {
-    if (this.autosizeInitialized) {
-      autosize.destroy(this.$refs.textarea);
-    }
-  },
+  /*beforeUnmount() {*/
+  /*if (this.autosizeInitialized) {*/
+  /*autosize.destroy(this.$refs.textarea);*/
+  /*}*/
+  /*},*/
 
   methods: {
     updateValue(value) {
@@ -319,11 +319,11 @@ export default {
       this.isTouched = options.touched;
     },
 
-    refreshSize() {
-      if (this.autosizeInitialized) {
-        autosize.update(this.$refs.textarea);
-      }
-    },
+    /*refreshSize() {*/
+    /*if (this.autosizeInitialized) {*/
+    /*autosize.update(this.$refs.textarea);*/
+    /*}*/
+    /*},*/
 
     focus() {
       (this.$refs.input || this.$refs.textarea).focus();
